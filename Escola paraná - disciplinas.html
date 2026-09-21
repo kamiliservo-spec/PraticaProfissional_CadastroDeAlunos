@@ -101,8 +101,11 @@ function horarioDisciplina(disciplina) {
         // PESQUISAR DISCIPLINA
         // =========================================
 
-        function buscarDisciplina() {
+      // =========================================
+// PESQUISAR DISCIPLINA
+// =========================================
 
+function buscarDisciplina() {
     let codigo = document
         .getElementById("codigoPesquisa")
         .value
@@ -110,61 +113,57 @@ function horarioDisciplina(disciplina) {
         .toUpperCase();
 
     if (codigo === "") {
-
         document.getElementById("resultadoPesquisa").innerHTML = `
             <p>Digite o código da disciplina.</p>
         `;
-
         horarioDisciplina(null);
-
         return;
     }
 
     let disciplina = disciplinas.find(d => d.codigo === codigo);
 
     if (!disciplina) {
-
         document.getElementById("resultadoPesquisa").innerHTML = `
             <p>Disciplina não encontrada.</p>
         `;
-
         horarioDisciplina(null);
-
         return;
+    }
+
+    // Monta a lista de provas cadastradas para essa disciplina
+    let htmlProvas = "";
+    if (disciplina.provas && disciplina.provas.length > 0) {
+        htmlProvas = "<ul>";
+        disciplina.provas.forEach(prova => {
+            htmlProvas += `
+                <li>
+                    <strong>${prova.nome}</strong> - Data: ${prova.data}
+                    ${prova.conteudo ? `<br><em>Conteúdo: ${prova.conteudo}</em>` : ""}
+                </li>
+            `;
+        });
+        htmlProvas += "</ul>";
+    } else {
+        htmlProvas = "<p>Nenhuma prova cadastrada para esta disciplina.</p>";
     }
 
     // Mostra as informações da disciplina
     document.getElementById("resultadoPesquisa").innerHTML = `
         <h3>${disciplina.nome}</h3>
-
         <p><strong>Código:</strong> ${disciplina.codigo}</p>
+        <p><strong>Carga Horária:</strong> ${disciplina.cargaHoraria}</p>
+        <p><strong>Professor:</strong> ${disciplina.professor}</p>
+        <p><strong>E-mail:</strong> ${disciplina.email}</p>
+        <p><strong>Dia:</strong> ${disciplina.diaSemana}</p>
+        <p><strong>Horário:</strong> ${disciplina.horaInicio} às ${disciplina.horaFim}</p>
+        <p><strong>Provas Agendadas:</strong></p>
+        ${htmlProvas}
+    `;
 
-        <p><strong>Carga Horária:</strong> 
-            ${disciplina.cargaHoraria}
-        </p>
-
-        <p><strong>Professor:</strong> 
-            ${disciplina.professor}
-        </p>
-
-        <p><strong>E-mail:</strong> 
-            ${disciplina.email}
-        </p>
-
-        <p><strong>Dia:</strong> 
-            ${disciplina.diaSemana}
-        </p>
-
-        <p><strong>Horário:</strong> 
-            ${disciplina.horaInicio} às ${disciplina.horaFim}
-        </p>
-        <p>Provas Agendadas:</>
-                ${htmlProvas}
-            `;
-
-
-    // Marca o dia e horário na tabela
-    horarioDisciplina(disciplina);
+    // Marca o dia e horário na tabela (caso a função horarioDisciplina exista no CSS/JS)
+    if (typeof horarioDisciplina === "function") {
+        horarioDisciplina(disciplina);
+    }
 }
 
         // =========================================

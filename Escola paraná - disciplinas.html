@@ -31,68 +31,27 @@
 
         <div id="resultadoPesquisa"></div>
         <div id="resultadoCadastro"></div>
-    </div>
-
-<div class="caixaCadastro">
-
-    <h2>Horário das disciplinas</h2>
-
-    <table class="calendar" id="tabelaHorario">
-        <thead>
-            <tr>
-                <th>Horário</th>
-                <th>Seg</th>
-                <th>Ter</th>
-                <th>Qua</th>
-                <th>Qui</th>
-                <th>Sex</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <th>08:00 - 09:00</th>
-                <td data-dia="Segunda-feira" data-horario="08:00"></td>
-                <td data-dia="Terça-feira" data-horario="08:00"></td>
-                <td data-dia="Quarta-feira" data-horario="08:00"></td>
-                <td data-dia="Quinta-feira" data-horario="08:00"></td>
-                <td data-dia="Sexta-feira" data-horario="08:00"></td>
-            </tr>
-
-            <tr>
-                <th>09:00 - 10:00</th>
-                <td data-dia="Segunda-feira" data-horario="09:00"></td>
-                <td data-dia="Terça-feira" data-horario="09:00"></td>
-                <td data-dia="Quarta-feira" data-horario="09:00"></td>
-                <td data-dia="Quinta-feira" data-horario="09:00"></td>
-                <td data-dia="Sexta-feira" data-horario="09:00"></td>
-            </tr>
-
-            <tr>
-                <th>10:00 - 11:00</th>
-                <td data-dia="Segunda-feira" data-horario="10:00"></td>
-                <td data-dia="Terça-feira" data-horario="10:00"></td>
-                <td data-dia="Quarta-feira" data-horario="10:00"></td>
-                <td data-dia="Quinta-feira" data-horario="10:00"></td>
-                <td data-dia="Sexta-feira" data-horario="10:00"></td>
-            </tr>
-
-            <tr>
-                <th>11:00 - 12:00</th>
-                <td data-dia="Segunda-feira" data-horario="11:00"></td>
-                <td data-dia="Terça-feira" data-horario="11:00"></td>
-                <td data-dia="Quarta-feira" data-horario="11:00"></td>
-                <td data-dia="Quinta-feira" data-horario="11:00"></td>
-                <td data-dia="Sexta-feira" data-horario="11:00"></td>
-            </tr>
-        </tbody>
-    </table>
-
-</div>
 
 
+    <!-- ========================= -->
+<!-- CADASTRAR PROVA           -->
+<!-- ========================= -->
+        <h2>Cadastrar Prova em uma Disciplina</h2>
+
+        <input type="text" id="codigoDisciplinaProva" placeholder="Código da Disciplina (ex: D001)"></input>
+        <input type="text" id="nomeProva" placeholder="Nome da Prova (ex: Prova Mensal - Cap. 3)"></input>
+        <input type="date" id="dataProva"></input>
+        <input type="text" id="conteudoProva" placeholder="Conteúdo cobrado (opcional)"></input>
+
+        <button class="botao" onclick="cadastrarProva()">Cadastrar Prova</button>
+
+        <div id="resultadoCadastroProva"></div>
 
   
+    </div>
+
+
+
 
     <!-- BOTÃO VOLTAR -->
     <p>
@@ -199,76 +158,67 @@ function horarioDisciplina(disciplina) {
         <p><strong>Horário:</strong> 
             ${disciplina.horaInicio} às ${disciplina.horaFim}
         </p>
-    `;
+        <p>Provas Agendadas:</>
+                ${htmlProvas}
+            `;
+
 
     // Marca o dia e horário na tabela
     horarioDisciplina(disciplina);
 }
 
-        
-
-
         // =========================================
-        // CADASTRAR DISCIPLINA
+        // CADASTRAR PROVA EM UMA DISCIPLINA
         // =========================================
+        function cadastrarProva() {
+            let codigo = document.getElementById("codigoDisciplinaProva").value.trim().toUpperCase();
+            let nomeProva = document.getElementById("nomeProva").value.trim();
+            let dataProva = document.getElementById("dataProva").value;
+            let conteudoProva = document.getElementById("conteudoProva").value.trim();
 
-        function cadastrar() {
-            let codigo = document.getElementById("inputCodigo").value.trim().toUpperCase();
-            let nome = document.getElementById("inputNome").value.trim();
-            let cargaHoraria = document.getElementById("inputCargaHoraria").value.trim();
-            let professor = document.getElementById("inputProfessor").value.trim();
-            let email = document.getElementById("inputEmailProfessor").value.trim();
-            let ano = document.getElementById("inputAno").value.trim();
-            let turno = document.getElementById("inputTurno").value.trim();
-
-            if (
-                codigo === "" ||
-                nome === "" ||
-                cargaHoraria === "" ||
-                professor === "" ||
-                email === "" ||
-                ano === "" ||
-                turno === ""
-            ) {
-                document.getElementById("resultadoCadastro").innerHTML = `
-                    <p>Preencha todos os campos antes de cadastrar.</p>
+            if (codigo === "" || nomeProva === "" || dataProva === "") {
+                document.getElementById("resultadoCadastroProva").innerHTML = `
+                    <p style="color: red;">Preencha o código, o nome da prova e a data.</p>
                 `;
                 return;
             }
 
-            let disciplinaExistente = disciplinas.find(d => d.codigo === codigo);
+            // Procura a disciplina onde a prova será associada
+            let disciplina = disciplinas.find(d => d.codigo === codigo);
 
-            if (disciplinaExistente) {
-                document.getElementById("resultadoCadastro").innerHTML = `
-                    <p>Já existe uma disciplina com o código <strong>${codigo}</strong>.</p>
+            if (!disciplina) {
+                document.getElementById("resultadoCadastroProva").innerHTML = `
+                    <p style="color: red;">Disciplina com o código <strong>${codigo}</strong> não foi encontrada.</p>
                 `;
                 return;
             }
 
-            let novaDisciplina = {
-                codigo: codigo,
-                nome: nome,
-                cargaHoraria: cargaHoraria,
-                professor: professor,
-                email: email,
-                ano: ano,
-                turno: turno
-            };
+            // Garante que o array de provas existe na disciplina
+            if (!disciplina.provas) {
+                disciplina.provas = [];
+            }
 
-            disciplinas.push(novaDisciplina);
+            // Adiciona a nova prova
+            disciplina.provas.push({
+                nome: nomeProva,
+                data: dataProva,
+                conteudo: conteudoProva
+            });
 
-            document.getElementById("resultadoCadastro").innerHTML = `
-                <h3>Disciplina cadastrada com sucesso!</h3>
-                <p><strong>Código:</strong> ${novaDisciplina.codigo}</p>
-                <p><strong>Nome:</strong> ${novaDisciplina.nome}</p>
-                <p><strong>Carga Horária:</strong> ${novaDisciplina.cargaHoraria}</p>
-                <p><strong>Professor:</strong> ${novaDisciplina.professor}</p>
-                <p><strong>E-mail:</strong> ${novaDisciplina.email}</p>
-                <p><strong>Ano / Série:</strong> ${novaDisciplina.ano}</p>
-                <p><strong>Turno:</strong> ${novaDisciplina.turno}</p>
+            document.getElementById("resultadoCadastroProva").innerHTML = `
+                <p style="color: green;">Prova cadastrada com sucesso em <strong>${disciplina.nome}</strong>!</p>
             `;
 
-            limparCadastro();
+            // Limpa os campos de cadastro de prova
+            document.getElementById("codigoDisciplinaProva").value = "";
+            document.getElementById("nomeProva").value = "";
+            document.getElementById("dataProva").value = "";
+            document.getElementById("conteudoProva").value = "";
+
+            // Se a disciplina cadastrada for a que está aberta na busca, atualiza os dados
+            if (document.getElementById("codigoPesquisa").value.trim().toUpperCase() === codigo) {
+                buscarDisciplina();
+            }
         }
 
 

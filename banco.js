@@ -4,11 +4,14 @@
 
 
 // =========================================
+// BANCO DE DADOS - ESCOLA PARANÁ
+// =========================================
+
+// =========================================
 // PROFESSORES
 // =========================================
 
 let professores = [
-
     {
         codigo: "P001",
         nome: "Ana Paula Souza",
@@ -16,7 +19,6 @@ let professores = [
         formacao: "Licenciatura em Matemática",
         email: "ana.souza@escolaparana.com.br"
     },
-
     {
         codigo: "P002",
         nome: "Carlos Eduardo Lima",
@@ -24,7 +26,6 @@ let professores = [
         formacao: "Licenciatura em História",
         email: "carlos.lima@escolaparana.com.br"
     },
-
     {
         codigo: "P003",
         nome: "Mariana Oliveira",
@@ -32,7 +33,6 @@ let professores = [
         formacao: "Licenciatura em Letras",
         email: "mariana.oliveira@escolaparana.com.br"
     },
-
     {
         codigo: "P004",
         nome: "João Pedro Martins",
@@ -40,7 +40,6 @@ let professores = [
         formacao: "Licenciatura em Geografia",
         email: "joao.martins@escolaparana.com.br"
     },
-
     {
         codigo: "P005",
         nome: "Juliana Ferreira",
@@ -48,7 +47,6 @@ let professores = [
         formacao: "Licenciatura em Ciências Biológicas",
         email: "juliana.ferreira@escolaparana.com.br"
     },
-
     {
         codigo: "P006",
         nome: "Ricardo Alves",
@@ -56,7 +54,6 @@ let professores = [
         formacao: "Licenciatura em Educação Física",
         email: "ricardo.alves@escolaparana.com.br"
     },
-
     {
         codigo: "P007",
         nome: "Fernanda Costa",
@@ -64,7 +61,6 @@ let professores = [
         formacao: "Licenciatura em Química",
         email: "fernanda.costa@escolaparana.com.br"
     },
-
     {
         codigo: "P008",
         nome: "Marcelo Rodrigues",
@@ -72,7 +68,6 @@ let professores = [
         formacao: "Licenciatura em Física",
         email: "marcelo.alves@escolaparana.com.br"
     },
-
     {
         codigo: "P009",
         nome: "Patrícia Rocha",
@@ -80,7 +75,6 @@ let professores = [
         formacao: "Licenciatura em Letras - Inglês",
         email: "patricia.rocha@escolaparana.com.br"
     },
-
     {
         codigo: "P010",
         nome: "Camila Santos",
@@ -88,15 +82,11 @@ let professores = [
         formacao: "Licenciatura em Artes",
         email: "camila.santos@escolaparana.com.br"
     }
-
 ];
 
 
 // =========================================
 // DISCIPLINAS
-// =========================================
-// =========================================
-// BANCO DE DADOS - DISCIPLINAS
 // =========================================
 
 let disciplinas = [
@@ -105,8 +95,8 @@ let disciplinas = [
         nome: "Matemática",
         cargaHoraria: "80h",
         professorCodigo: "P001",
-        professor: "Carlos Silva",
-        email: "carlos.silva@escola.br",
+        professor: "Ana Paula Souza",
+        email: "ana.souza@escolaparana.com.br",
         diaSemana: "Segunda-feira",
         horaInicio: "08:00",
         horaFim: "09:00",
@@ -117,8 +107,8 @@ let disciplinas = [
         nome: "Português",
         cargaHoraria: "80h",
         professorCodigo: "P003",
-        professor: "Ana Souza",
-        email: "ana.souza@escola.br",
+        professor: "Mariana Oliveira",
+        email: "mariana.oliveira@escolaparana.com.br",
         diaSemana: "Terça-feira",
         horaInicio: "09:00",
         horaFim: "10:00",
@@ -129,8 +119,8 @@ let disciplinas = [
         nome: "História",
         cargaHoraria: "60h",
         professorCodigo: "P002",
-        professor: "João Mendes",
-        email: "joao.mendes@escola.br",
+        professor: "Carlos Eduardo Lima",
+        email: "carlos.lima@escolaparana.com.br",
         diaSemana: "Quarta-feira",
         horaInicio: "10:00",
         horaFim: "11:00",
@@ -141,8 +131,8 @@ let disciplinas = [
         nome: "Geografia",
         cargaHoraria: "60h",
         professorCodigo: "P004",
-        professor: "Mariana Lima",
-        email: "mariana.lima@escola.br",
+        professor: "João Pedro Martins",
+        email: "joao.martins@escolaparana.com.br",
         diaSemana: "Quinta-feira",
         horaInicio: "11:00",
         horaFim: "12:00",
@@ -153,8 +143,8 @@ let disciplinas = [
         nome: "Biologia",
         cargaHoraria: "60h",
         professorCodigo: "P005",
-        professor: "Fernanda Costa",
-        email: "fernanda.costa@escola.br",
+        professor: "Juliana Ferreira",
+        email: "juliana.ferreira@escolaparana.com.br",
         diaSemana: "Sexta-feira",
         horaInicio: "08:00",
         horaFim: "09:00",
@@ -165,8 +155,8 @@ let disciplinas = [
         nome: "Física",
         cargaHoraria: "60h",
         professorCodigo: "P008",
-        professor: "Roberto Alves",
-        email: "roberto.alves@escola.br",
+        professor: "Marcelo Rodrigues",
+        email: "marcelo.alves@escolaparana.com.br",
         diaSemana: "Segunda-feira",
         horaInicio: "09:00",
         horaFim: "10:00",
@@ -177,8 +167,8 @@ let disciplinas = [
         nome: "Química",
         cargaHoraria: "60h",
         professorCodigo: "P007",
-        professor: "Patricia Rocha",
-        email: "patricia.rocha@escola.br",
+        professor: "Fernanda Costa",
+        email: "fernanda.costa@escolaparana.com.br",
         diaSemana: "Terça-feira",
         horaInicio: "10:00",
         horaFim: "11:00",
@@ -189,8 +179,8 @@ let disciplinas = [
         nome: "Inglês",
         cargaHoraria: "40h",
         professorCodigo: "P009",
-        professor: "Lucas Ferreira",
-        email: "lucas.ferreira@escola.br",
+        professor: "Patrícia Rocha",
+        email: "patricia.rocha@escolaparana.com.br",
         diaSemana: "Quarta-feira",
         horaInicio: "11:00",
         horaFim: "12:00",
@@ -201,8 +191,8 @@ let disciplinas = [
         nome: "Educação Física",
         cargaHoraria: "40h",
         professorCodigo: "P006",
-        professor: "Ricardo Santos",
-        email: "ricardo.santos@escola.br",
+        professor: "Ricardo Alves",
+        email: "ricardo.alves@escolaparana.com.br",
         diaSemana: "Quinta-feira",
         horaInicio: "08:00",
         horaFim: "09:00",
@@ -213,8 +203,8 @@ let disciplinas = [
         nome: "Artes",
         cargaHoraria: "40h",
         professorCodigo: "P010",
-        professor: "Beatriz Oliveira",
-        email: "beatriz.oliveira@escola.br",
+        professor: "Camila Santos",
+        email: "camila.santos@escolaparana.com.br",
         diaSemana: "Sexta-feira",
         horaInicio: "09:00",
         horaFim: "10:00",

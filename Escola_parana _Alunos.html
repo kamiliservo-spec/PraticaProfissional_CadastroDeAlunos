@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="Escola_Parana.css">
+
+    <title>Alunos - Escola Paraná</title>
+
+</head>
+
+<body>
+
+    <titulo>Arquivo de cdastros</titulo>
+
+
+    <!-- ========================= -->
+    <!-- PESQUISA DE ALUNOS -->
+    <!-- ========================= -->
+
+      <div class="caixaPesquisa">
+
+    <h2>Pesquisar cadastro</h2>
+
+    <select class="form-container" id="tipoPesquisa">
+
+        <option value="Aluno">
+            Aluno
+        </option>
+
+        <option value="Professor">
+            Professor
+        </option>
+
+        <option value="Disciplina">
+            Disciplina
+        </option>
+
+    </select>
+
+    <br><br>
+
+    <input
+        class="form-container"
+        type="text"
+        id="codigoPesquisa"
+        placeholder="Código do cadastro"
+    >
+
+    <button class="botao" onclick="buscarCadastro()">
+        Procurar
+    </button>
+
+    <div id="resultadoPesquisa"></div>
+
+    <div id="resultadoCadastro"></div>
+
+</div>
+
+
+    <!-- ========================= -->
+    <!-- CADASTRO DE ALUNOS -->
+    <!-- ========================= -->
+
+    <div class="caixaCadastro">
+
+        <h2>Cadastrar</h2>
+        
+        <label for="inputEscolha">
+            Cadastrar:
+        </label>
+
+        <select
+            class="form-container"
+            id="inputEscolha"
+        >
+
+            <option value="">
+                Selecione uma opção
+            </option>
+
+            <option value="Aluno">
+                Aluno
+            </option>
+
+            <option value="Professor">
+                Professor
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <label for="inputCodigo">
+            Código:
+        </label>
+
+        <input
+            class="form-container"
+            type="text"
+            id="inputCodigo"
+        >
+
+        <br><br>
+
+
+        <label for="inputNome">
+            Nome completo:
+        </label>
+
+        <input
+            class="form-container"
+            type="text"
+            id="inputNome"
+        >
+
+        <br><br>
+
+
+        <label for="inputCPF">
+            CPF:
+        </label>
+
+        <input
+            class="form-container"
+            type="text"
+            id="inputCPF"
+        >
+
+        <br><br>
+
+
+        <label for="inputEndereco">
+            Endereço:
+        </label>
+
+        <input
+            class="form-container"
+            type="text"
+            id="inputEndereco"
+        >
+
+        <br><br>
+
+
+        <label for="inputResponsavel">
+            Responsável:
+        </label>
+
+        <input
+            class="form-container"
+            type="text"
+            id="inputResponsavel"
+        >
+
+        <br><br>
+
+
+        <label for="inputEmail">
+            E-mail do responsável:
+        </label>
+
+        <input
+            class="form-container"
+            type="text"
+            id="inputEmail"
+        >
+
+        <br><br>
+
+
+        <label for="inputTelefone">
+            Telefone do responsável:
+        </label>
+
+        <input
+            class="form-container"
+            type="text"
+            id="inputTelefone"
+        >
+
+        <br><br>
+
+
+        <label for="inputNascimento">
+            Data de nascimento:
+        </label>
+
+        <input
+            class="form-container"
+            type="date"
+            id="inputNascimento"
+        >
+
+        <br><br>
+
+
+        <label for="inputGenero">
+            Gênero:
+        </label>
+
+        <input
+            class="form-container"
+            type="text"
+            id="inputGenero"
+        >
+
+        <br><br>
+
+
+        <label for="inputAno">
+            Ano:
+        </label>
+
+        <input
+            class="form-container"
+            type="text"
+            id="inputAno"
+        >
+
+        <br><br>
+
+
+        <label for="inputTurma">
+            Turma:
+        </label>
+
+        <input
+            class="form-container"
+            type="text"
+            id="inputTurma"
+        >
+
+        <br><br>
+
+
+        <button class="botao" onclick="cadastrar()">
+            Cadastrar
+        </button>
+
+
+        <button class="botao" onclick="limparCadastro()">
+            Novo aluno
+        </button>
+
+    </div>
+
+    <!-- BOTÃO VOLTAR -->
+
+
+        <p>
+
+            <a href="file:///C:/Kamili%20Servo/Pr%C3%A1tica%20profissional/Trabalho/Escola%20paran%C3%A1%20-%20primeira%20tela.html">
+
+    <button class="botaoVoltar">
+        voltar
+    </button>
+
+            </a>
+
+        </p>
+
+    </div>
+
+<script src="banco.js"></script>
+<script src="alunos.js"></script>
+
+    <script>
+
+
+        // =========================================
+        // PESQUISAR ALUNO
+        // =========================================
+
+      // =========================================
+// PESQUISAR ALUNO, PROFESSOR OU DISCIPLINA
+// =========================================
+
+function buscarCadastro() {
+
+    let codigo = document
+        .getElementById("codigoPesquisa")
+        .value
+        .trim()
+        .toUpperCase();
+
+    let tipo = document
+        .getElementById("tipoPesquisa")
+        .value;
+
+
+    // =====================================
+    // VERIFICA SE DIGITOU O CÓDIGO
+    // =====================================
+
+    if (codigo === "") {
+
+        document.getElementById("resultadoPesquisa").innerHTML = `
+            <p>
+                Digite o código do cadastro.
+            </p>
+        `;
+
+        return;
+    }
+
+
+    // =====================================
+    // ALUNO
+    // =====================================
+
+    if (tipo === "Aluno") {
+
+        let aluno = alunos.find(a =>
+            a.codigo === codigo
+        );
+
+
+        if (!aluno) {
+
+            document.getElementById("resultadoPesquisa").innerHTML = `
+                <p>
+                    Aluno não encontrado.
+                </p>
+            `;
+
+            return;
+        }
+
+
+        document.getElementById("resultadoPesquisa").innerHTML = `
+
+            <h3>Aluno encontrado</h3>
+
+            <p>
+                <strong>Código:</strong>
+                ${aluno.codigo}
+            </p>
+
+            <p>
+                <strong>Nome:</strong>
+                ${aluno.nome}
+            </p>
+
+            <p>
+                <strong>Idade:</strong>
+                ${aluno.idade} anos
+            </p>
+
+            <p>
+                <strong>Turma:</strong>
+                ${aluno.turma}
+            </p>
+
+            <p>
+                <strong>E-mail:</strong>
+                ${aluno.email}
+            </p>
+
+        `;
+
+        return;
+    }
+
+
+    // =====================================
+    // PROFESSOR
+    // =====================================
+
+    if (tipo === "Professor") {
+
+        let professor = professores.find(p =>
+            p.codigo === codigo
+        );
+
+
+        if (!professor) {
+
+            document.getElementById("resultadoPesquisa").innerHTML = `
+                <p>
+                    Professor não encontrado.
+                </p>
+            `;
+
+            return;
+        }
+
+
+        document.getElementById("resultadoPesquisa").innerHTML = `
+
+            <h3>Professor encontrado</h3>
+
+            <p>
+                <strong>Código:</strong>
+                ${professor.codigo}
+            </p>
+
+            <p>
+                <strong>Nome:</strong>
+                ${professor.nome}
+            </p>
+
+            <p>
+                <strong>Disciplina:</strong>
+                ${professor.disciplina}
+            </p>
+
+            <p>
+                <strong>Formação:</strong>
+                ${professor.formacao}
+            </p>
+
+            <p>
+                <strong>E-mail:</strong>
+                ${professor.email}
+            </p>
+
+        `;
+
+        return;
+    }
+
+
+    // =====================================
+    // DISCIPLINA
+    // =====================================
+
+    if (tipo === "Disciplina") {
+
+        let disciplina = disciplinas.find(d =>
+            d.codigo === codigo
+        );
+
+
+        if (!disciplina) {
+
+            document.getElementById("resultadoPesquisa").innerHTML = `
+                <p>
+                    Disciplina não encontrada.
+                </p>
+            `;
+
+            return;
+        }
+
+
+        // Procura o professor responsável
+        let professor = professores.find(p =>
+            p.codigo === disciplina.professorCodigo
+        );
+
+
+        document.getElementById("resultadoPesquisa").innerHTML = `
+
+            <h3>Disciplina encontrada</h3>
+
+            <p>
+                <strong>Código:</strong>
+                ${disciplina.codigo}
+            </p>
+
+            <p>
+                <strong>Nome:</strong>
+                ${disciplina.nome}
+            </p>
+
+            <p>
+                <strong>Carga Horária:</strong>
+                ${disciplina.cargaHoraria}
+            </p>
+
+            <p>
+                <strong>Professor:</strong>
+                ${professor ? professor.nome : "Não informado"}
+            </p>
+
+            <p>
+                <strong>Dia:</strong>
+                ${disciplina.diaSemana}
+            </p>
+
+            <p>
+                <strong>Horário:</strong>
+                ${disciplina.horaInicio}
+                às
+                ${disciplina.horaFim}
+            </p>
+
+        `;
+
+        return;
+    }
+
+}
+
+
+
+        // =========================================
+        // CADASTRAR ALUNO
+        // =========================================
+
+        function cadastrar() {
+
+            let codigo =
+                document.getElementById("inputCodigo").value
+                .trim()
+                .toUpperCase();
+
+            let nome =
+                document.getElementById("inputNome").value.trim();
+
+            let cpf =
+                document.getElementById("inputCPF").value.trim();
+
+            let endereco =
+                document.getElementById("inputEndereco").value.trim();
+
+            let responsavel =
+                document.getElementById("inputResponsavel").value.trim();
+
+            let email =
+                document.getElementById("inputEmail").value.trim();
+
+            let telefone =
+                document.getElementById("inputTelefone").value.trim();
+
+            let nascimento =
+                document.getElementById("inputNascimento").value;
+
+            let genero =
+                document.getElementById("inputGenero").value.trim();
+
+            let ano =
+                document.getElementById("inputAno").value.trim();
+
+            let turma =
+                document.getElementById("inputTurma").value.trim();
+
+
+            // =====================================
+            // VERIFICAÇÃO DOS CAMPOS
+            // =====================================
+
+            if (
+                codigo === "" ||
+                nome === "" ||
+                cpf === "" ||
+                endereco === "" ||
+                responsavel === "" ||
+                email === "" ||
+                telefone === "" ||
+                nascimento === "" ||
+                genero === "" ||
+                ano === "" ||
+                turma === ""
+            ) {
+
+                document.getElementById("resultadoCadastro").innerHTML = `
+
+                    <p>
+                        Preencha todos os campos antes de cadastrar.
+                    </p>
+
+                `;
+
+                return;
+            }
+
+
+            // =====================================
+            // VERIFICA SE O CÓDIGO JÁ EXISTE
+            // =====================================
+
+            let alunoExistente = alunos.find(a =>
+                a.codigo === codigo
+            );
+
+
+            if (alunoExistente) {
+
+                document.getElementById("resultadoCadastro").innerHTML = `
+
+                    <p>
+                        Já existe um aluno com o código
+                        <strong>${codigo}</strong>.
+                    </p>
+
+                `;
+
+                return;
+            }
+
+
+            // =====================================
+            // CRIA O NOVO ALUNO
+            // =====================================
+
+            let novoAluno = {
+
+                codigo: codigo,
+
+                nome: nome,
+
+                cpf: cpf,
+
+                endereco: endereco,
+
+                responsavel: responsavel,
+
+                email: email,
+
+                telefone: telefone,
+
+                nascimento: nascimento,
+
+                genero: genero,
+
+                ano: ano,
+
+                turma: turma
+
+            };
+
+
+            // Adiciona ao banco
+
+            alunos.push(novoAluno);
+
+
+            // =====================================
+            // MOSTRA O ALUNO CADASTRADO
+            // =====================================
+
+            document.getElementById("resultadoCadastro").innerHTML = `
+
+                <h3>
+                    Aluno cadastrado com sucesso!
+                </h3>
+
+                <p>
+                    <strong>Código:</strong>
+                    ${novoAluno.codigo}
+                </p>
+
+                <p>
+                    <strong>Nome:</strong>
+                    ${novoAluno.nome}
+                </p>
+
+                <p>
+                    <strong>CPF:</strong>
+                    ${novoAluno.cpf}
+                </p>
+
+                <p>
+                    <strong>Endereço:</strong>
+                    ${novoAluno.endereco}
+                </p>
+
+                <p>
+                    <strong>Responsável:</strong>
+                    ${novoAluno.responsavel}
+                </p>
+
+                <p>
+                    <strong>E-mail:</strong>
+                    ${novoAluno.email}
+                </p>
+
+                <p>
+                    <strong>Telefone:</strong>
+                    ${novoAluno.telefone}
+                </p>
+
+                <p>
+                    <strong>Data de nascimento:</strong>
+                    ${novoAluno.nascimento}
+                </p>
+
+                <p>
+                    <strong>Gênero:</strong>
+                    ${novoAluno.genero}
+                </p>
+
+                <p>
+                    <strong>Ano:</strong>
+                    ${novoAluno.ano}
+                </p>
+
+                <p>
+                    <strong>Turma:</strong>
+                    ${novoAluno.turma}
+                </p>
+
+            `;
+
+
+            // Limpa o formulário
+
+            limparCadastro();
+
+        }
+
+
+        // =========================================
+        // LIMPAR FORMULÁRIO
+        // =========================================
+
+        function limparCadastro() {
+
+            document.getElementById("inputCodigo").value = "";
+
+            document.getElementById("inputNome").value = "";
+
+            document.getElementById("inputCPF").value = "";
+
+            document.getElementById("inputEndereco").value = "";
+
+            document.getElementById("inputResponsavel").value = "";
+
+            document.getElementById("inputEmail").value = "";
+
+            document.getElementById("inputTelefone").value = "";
+
+            document.getElementById("inputNascimento").value = "";
+
+            document.getElementById("inputGenero").value = "";
+
+            document.getElementById("inputAno").value = "";
+
+            document.getElementById("inputTurma").value = "";
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>

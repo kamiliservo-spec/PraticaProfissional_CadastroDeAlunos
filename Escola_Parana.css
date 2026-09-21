@@ -1,0 +1,182 @@
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+        
+        
+        body {
+            height: 200vh;
+            margin: 0;
+            background: linear-gradient(to bottom, #2e9df8, #04427c);
+           font-family: 'Fredoka', sans-serif;
+        }
+
+
+        titulo {  display: flex;
+  justify-content: center;
+top: 25px;
+  margin: 0;
+            font-size: 70px;
+            color: rgb(250, 221, 60);
+            -webkit-text-stroke: 1px rgba(173, 84, 0, 0.897);
+  
+               position: relative;
+        }
+
+        .caixaTitulo{display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+            font-size: 70px;
+            font-weight: 200px;
+            color: rgb(250, 221, 60);
+            -webkit-text-stroke: 1px rgba(173, 84, 0, 0.897);
+
+                  background-color: rgb(31, 63, 168);
+               position: fixed;
+            
+                  border-bottom: 5px solid white;
+                height: fit-content;
+            width: 100%;}
+
+
+
+        .caixaPrincipal {
+            margin: 0px auto;
+            width: fit-content;
+            background-color: rgb(31, 63, 168);
+            border-radius: 25px;
+            border: 5px solid white;
+            padding: 10px;
+            color: white;
+            position: fixed;
+left: 150px;
+top:200px;
+content: center;
+ 
+        }
+                .caixaImagem {
+            margin: 0px auto;
+            width: fit-content;
+            background-color: rgb(31, 63, 168);
+            border-radius: 25px;
+            border: 5px solid white;
+            padding: 10px;
+            color: white;
+            position: fixed;
+right: 150px;
+top: 200px;
+content: center;
+ 
+        }
+       .caixaCadastro {
+            margin: 20px auto;
+            width: fit-content;
+            background-color: rgb(31, 63, 168);
+            border-radius: 25px;
+            border: 5px solid white;
+            padding: 10px;
+        color: white;
+                                top: 100px;
+           right: 50px;
+           position: absolute ;
+           
+        }
+
+               .caixaPesquisa {
+            margin: 50px auto;
+            width: fit-content;
+            background-color: rgb(31, 63, 168);
+            border-radius: 25px;
+            border: 5px solid white;
+            padding: 10px;
+       
+
+                                 color: white;
+                      top: 100px;
+           left: 50px;
+           position: absolute ;
+            
+        }
+
+        .botao {
+            margin: 20px;
+            padding: 7px 30px;
+            cursor: pointer;
+            border-radius: 50px;
+            border: 5px solid white;
+            background-color: rgb(243, 30, 58);
+            color: white;
+            font-size: 30px;
+        }
+
+        .botao:hover {
+            padding: 7px 30px;
+            border: 5px solid rgb(243, 30, 58);
+            background-color: white;
+            color: rgb(243, 30, 58);
+        }
+
+
+                .botaoVoltar {
+            margin: 20px;
+            padding: 7px 30px;
+            cursor: pointer;
+            border-radius: 50px;
+            border: 5px solid white;
+            background-color: rgb(243, 30, 58);
+            color: white;
+            font-size: 30px;
+              position: fixed;
+              left: 50px;
+            bottom: 0;
+        }
+
+        .botaoVoltar:hover {
+            padding: 7px 30px;
+            border: 5px solid rgb(243, 30, 58);
+            background-color: white;
+            color: rgb(243, 30, 58);
+            position: absolute;
+            bottom: 0;
+        }
+        .caixaNome {
+            position: fixed;
+            padding: 5px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+  background-color: rgb(31, 63, 168);
+            color:white;
+            font-size: 30px;
+            border-top: 5px solid white;
+        }
+
+
+        
+
+        a:link {
+            color: white;
+        }
+
+        a:visited {
+            color: rgb(175, 175, 175);
+        }
+        .form-container {
+    width: 300px;
+    height: 25px;
+    padding: 5px 15px;
+    background-color: white;
+    color: rgb(243, 30, 58);
+    border-radius: 50px;
+    font-size: 15px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.form-container::placeholder {
+    color: rgb(243, 30, 58);
+}
+
+.form-container:focus {
+    background-color: white;
+        color: rgb(243, 30, 58);
+}

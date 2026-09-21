@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Escola_Parana.css">
+    <title>Disciplinas - Escola Paraná</title>
+</head>
+
+<body>
+
+    <titulo>Arquivo de disciplinas</titulo>
+
+    <!-- ========================= -->
+    <!-- PESQUISA DE DISCIPLINAS -->
+    <!-- ========================= -->
+
+    <div class="caixaPesquisa">
+        <h2>Pesquisar disciplina</h2>
+
+        <input
+            class="form-container"
+            type="text"
+            id="codigoPesquisa"
+            placeholder="Código da disciplina"
+        >
+
+        <button class="botao" onclick="buscarDisciplina()">
+            Procurar
+        </button>
+
+        <div id="resultadoPesquisa"></div>
+        <div id="resultadoCadastro"></div>
+    </div>
+
+<div class="caixaCadastro">
+
+    <h2>Horário das disciplinas</h2>
+
+    <table class="calendar" id="tabelaHorario">
+        <thead>
+            <tr>
+                <th>Horário</th>
+                <th>Seg</th>
+                <th>Ter</th>
+                <th>Qua</th>
+                <th>Qui</th>
+                <th>Sex</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>08:00 - 09:00</th>
+                <td data-dia="Segunda-feira" data-horario="08:00"></td>
+                <td data-dia="Terça-feira" data-horario="08:00"></td>
+                <td data-dia="Quarta-feira" data-horario="08:00"></td>
+                <td data-dia="Quinta-feira" data-horario="08:00"></td>
+                <td data-dia="Sexta-feira" data-horario="08:00"></td>
+            </tr>
+
+            <tr>
+                <th>09:00 - 10:00</th>
+                <td data-dia="Segunda-feira" data-horario="09:00"></td>
+                <td data-dia="Terça-feira" data-horario="09:00"></td>
+                <td data-dia="Quarta-feira" data-horario="09:00"></td>
+                <td data-dia="Quinta-feira" data-horario="09:00"></td>
+                <td data-dia="Sexta-feira" data-horario="09:00"></td>
+            </tr>
+
+            <tr>
+                <th>10:00 - 11:00</th>
+                <td data-dia="Segunda-feira" data-horario="10:00"></td>
+                <td data-dia="Terça-feira" data-horario="10:00"></td>
+                <td data-dia="Quarta-feira" data-horario="10:00"></td>
+                <td data-dia="Quinta-feira" data-horario="10:00"></td>
+                <td data-dia="Sexta-feira" data-horario="10:00"></td>
+            </tr>
+
+            <tr>
+                <th>11:00 - 12:00</th>
+                <td data-dia="Segunda-feira" data-horario="11:00"></td>
+                <td data-dia="Terça-feira" data-horario="11:00"></td>
+                <td data-dia="Quarta-feira" data-horario="11:00"></td>
+                <td data-dia="Quinta-feira" data-horario="11:00"></td>
+                <td data-dia="Sexta-feira" data-horario="11:00"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+
+  
+
+    <!-- BOTÃO VOLTAR -->
+    <p>
+        <a href="file:///C:/Kamili%20Servo/Pr%C3%A1tica%20profissional/Trabalho/Escola%20paran%C3%A1%20-%20primeira%20tela.html">
+            <button class="botaoVoltar">voltar</button>
+        </a>
+    </p>
+<script src="banco.js"></script>
+<script src="disciplinas.js"></script>
+
+    <script>
+
+
+function horarioDisciplina(disciplina) {
+
+    // Limpa as marcações anteriores
+    let celulas = document.querySelectorAll("#tabelaHorario td");
+
+    celulas.forEach(function(celula) {
+        celula.innerHTML = "";
+        celula.classList.remove("ocupado");
+    });
+
+    // Se não existe disciplina, não faz nada
+    if (!disciplina) {
+        return;
+    }
+
+    // Procura o dia e horário da disciplina
+    let celula = document.querySelector(
+        `#tabelaHorario td[data-dia="${disciplina.diaSemana}"][data-horario="${disciplina.horaInicio}"]`
+    );
+
+    // Marca a célula encontrada
+    if (celula) {
+        celula.innerHTML = `
+            <strong>${disciplina.nome}</strong>
+            <br>
+            ${disciplina.horaInicio} às ${disciplina.horaFim}
+        `;
+
+        celula.classList.add("ocupado");
+    }
+}
+
+        // =========================================
+        // PESQUISAR DISCIPLINA
+        // =========================================
+
+        function buscarDisciplina() {
+
+    let codigo = document
+        .getElementById("codigoPesquisa")
+        .value
+        .trim()
+        .toUpperCase();
+
+    if (codigo === "") {
+
+        document.getElementById("resultadoPesquisa").innerHTML = `
+            <p>Digite o código da disciplina.</p>
+        `;
+
+        horarioDisciplina(null);
+
+        return;
+    }
+
+    let disciplina = disciplinas.find(d => d.codigo === codigo);
+
+    if (!disciplina) {
+
+        document.getElementById("resultadoPesquisa").innerHTML = `
+            <p>Disciplina não encontrada.</p>
+        `;
+
+        horarioDisciplina(null);
+
+        return;
+    }
+
+    // Mostra as informações da disciplina
+    document.getElementById("resultadoPesquisa").innerHTML = `
+        <h3>${disciplina.nome}</h3>
+
+        <p><strong>Código:</strong> ${disciplina.codigo}</p>
+
+        <p><strong>Carga Horária:</strong> 
+            ${disciplina.cargaHoraria}
+        </p>
+
+        <p><strong>Professor:</strong> 
+            ${disciplina.professor}
+        </p>
+
+        <p><strong>E-mail:</strong> 
+            ${disciplina.email}
+        </p>
+
+        <p><strong>Dia:</strong> 
+            ${disciplina.diaSemana}
+        </p>
+
+        <p><strong>Horário:</strong> 
+            ${disciplina.horaInicio} às ${disciplina.horaFim}
+        </p>
+    `;
+
+    // Marca o dia e horário na tabela
+    horarioDisciplina(disciplina);
+}
+
+        
+
+
+        // =========================================
+        // CADASTRAR DISCIPLINA
+        // =========================================
+
+        function cadastrar() {
+            let codigo = document.getElementById("inputCodigo").value.trim().toUpperCase();
+            let nome = document.getElementById("inputNome").value.trim();
+            let cargaHoraria = document.getElementById("inputCargaHoraria").value.trim();
+            let professor = document.getElementById("inputProfessor").value.trim();
+            let email = document.getElementById("inputEmailProfessor").value.trim();
+            let ano = document.getElementById("inputAno").value.trim();
+            let turno = document.getElementById("inputTurno").value.trim();
+
+            if (
+                codigo === "" ||
+                nome === "" ||
+                cargaHoraria === "" ||
+                professor === "" ||
+                email === "" ||
+                ano === "" ||
+                turno === ""
+            ) {
+                document.getElementById("resultadoCadastro").innerHTML = `
+                    <p>Preencha todos os campos antes de cadastrar.</p>
+                `;
+                return;
+            }
+
+            let disciplinaExistente = disciplinas.find(d => d.codigo === codigo);
+
+            if (disciplinaExistente) {
+                document.getElementById("resultadoCadastro").innerHTML = `
+                    <p>Já existe uma disciplina com o código <strong>${codigo}</strong>.</p>
+                `;
+                return;
+            }
+
+            let novaDisciplina = {
+                codigo: codigo,
+                nome: nome,
+                cargaHoraria: cargaHoraria,
+                professor: professor,
+                email: email,
+                ano: ano,
+                turno: turno
+            };
+
+            disciplinas.push(novaDisciplina);
+
+            document.getElementById("resultadoCadastro").innerHTML = `
+                <h3>Disciplina cadastrada com sucesso!</h3>
+                <p><strong>Código:</strong> ${novaDisciplina.codigo}</p>
+                <p><strong>Nome:</strong> ${novaDisciplina.nome}</p>
+                <p><strong>Carga Horária:</strong> ${novaDisciplina.cargaHoraria}</p>
+                <p><strong>Professor:</strong> ${novaDisciplina.professor}</p>
+                <p><strong>E-mail:</strong> ${novaDisciplina.email}</p>
+                <p><strong>Ano / Série:</strong> ${novaDisciplina.ano}</p>
+                <p><strong>Turno:</strong> ${novaDisciplina.turno}</p>
+            `;
+
+            limparCadastro();
+        }
+
+
+        // =========================================
+        // LIMPAR FORMULÁRIO
+        // =========================================
+
+        function limparCadastro() {
+            document.getElementById("inputCodigo").value = "";
+            document.getElementById("inputNome").value = "";
+            document.getElementById("inputCargaHoraria").value = "";
+            document.getElementById("inputProfessor").value = "";
+            document.getElementById("inputEmailProfessor").value = "";
+            document.getElementById("inputAno").value = "";
+            document.getElementById("inputTurno").value = "";
+        }
+
+    </script>
+
+</body>
+
+</html>

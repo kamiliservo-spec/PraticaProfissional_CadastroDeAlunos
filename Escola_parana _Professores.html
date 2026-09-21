@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="Escola_Parana.css">
+
+    <title>Professores - Escola Paraná</title>
+
+</head>
+
+<body>
+
+<titulo>Pesquisar aluno ou professor</titulo>
+
+
+    <!-- ========================= -->
+    <!-- PESQUISA DE DISCIPLINAS -->
+    <!-- ========================= -->
+
+    <div class="caixaPesquisa">
+
+
+        <input
+            class="form-container"
+            type="text"
+            id="codigoPesquisa"
+            placeholder="Código"
+        >
+
+<button class="botao" onclick="buscarHorario()">
+    Procurar
+</button>
+
+
+        <div id="resultadoPesquisa"></div>
+        <div id="resultadoCadastro"></div>
+    </div>
+
+<div class="caixaCadastro">
+
+    <h2>Horário das disciplinas</h2>
+
+    <table class="calendar" id="tabelaHorario">
+        <thead>
+            <tr>
+                <th>Horário</th>
+                <th>Seg</th>
+                <th>Ter</th>
+                <th>Qua</th>
+                <th>Qui</th>
+                <th>Sex</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>08:00 - 09:00</th>
+                <td data-dia="Segunda-feira" data-horario="08:00"></td>
+                <td data-dia="Terça-feira" data-horario="08:00"></td>
+                <td data-dia="Quarta-feira" data-horario="08:00"></td>
+                <td data-dia="Quinta-feira" data-horario="08:00"></td>
+                <td data-dia="Sexta-feira" data-horario="08:00"></td>
+            </tr>
+
+            <tr>
+                <th>09:00 - 10:00</th>
+                <td data-dia="Segunda-feira" data-horario="09:00"></td>
+                <td data-dia="Terça-feira" data-horario="09:00"></td>
+                <td data-dia="Quarta-feira" data-horario="09:00"></td>
+                <td data-dia="Quinta-feira" data-horario="09:00"></td>
+                <td data-dia="Sexta-feira" data-horario="09:00"></td>
+            </tr>
+
+            <tr>
+                <th>10:00 - 11:00</th>
+                <td data-dia="Segunda-feira" data-horario="10:00"></td>
+                <td data-dia="Terça-feira" data-horario="10:00"></td>
+                <td data-dia="Quarta-feira" data-horario="10:00"></td>
+                <td data-dia="Quinta-feira" data-horario="10:00"></td>
+                <td data-dia="Sexta-feira" data-horario="10:00"></td>
+            </tr>
+
+            <tr>
+                <th>11:00 - 12:00</th>
+                <td data-dia="Segunda-feira" data-horario="11:00"></td>
+                <td data-dia="Terça-feira" data-horario="11:00"></td>
+                <td data-dia="Quarta-feira" data-horario="11:00"></td>
+                <td data-dia="Quinta-feira" data-horario="11:00"></td>
+                <td data-dia="Sexta-feira" data-horario="11:00"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+
+  
+
+    <!-- ========================= -->
+    <!-- BOTÃO VOLTAR -->
+    <!-- ========================= -->
+
+
+        <p>
+
+            <a href="file:///C:/Kamili%20Servo/Pr%C3%A1tica%20profissional/Trabalho/Escola%20paran%C3%A1%20-%20primeira%20tela.html">
+    <button class="botaoVoltar">
+        voltar
+    </button>
+            </a>
+
+        </p>
+
+
+
+
+
+<script src="banco.js"></script>
+
+<script>
+
+// =========================================
+// PESQUISAR ALUNO OU PROFESSOR
+// =========================================
+
+function buscarHorario() {
+
+    let codigo = document
+        .getElementById("codigoPesquisa")
+        .value
+        .trim()
+        .toUpperCase();
+
+
+    // =====================================
+    // VERIFICA SE DIGITOU UM CÓDIGO
+    // =====================================
+
+    if (codigo === "") {
+
+        document.getElementById("resultadoPesquisa").innerHTML = `
+            <p>
+                Digite o código do aluno ou professor.
+            </p>
+        `;
+
+        limparHorario();
+
+        return;
+    }
+
+
+    // =====================================
+    // PROCURA UM ALUNO
+    // =====================================
+
+    let aluno = alunos.find(function(a) {
+
+        return a.codigo === codigo;
+
+    });
+
+
+    // Se encontrou um aluno
+
+    if (aluno) {
+
+        mostrarHorarioAluno(aluno);
+
+        return;
+    }
+
+
+    // =====================================
+    // PROCURA UM PROFESSOR
+    // =====================================
+
+    let professor = professores.find(function(p) {
+
+        return p.codigo === codigo;
+
+    });
+
+
+    // Se encontrou um professor
+
+    if (professor) {
+
+        mostrarHorarioProfessor(professor);
+
+        return;
+    }
+
+
+    // =====================================
+    // CÓDIGO NÃO ENCONTRADO
+    // =====================================
+
+    document.getElementById("resultadoPesquisa").innerHTML = `
+
+        <p>
+            Nenhum aluno ou professor encontrado
+            com o código <strong>${codigo}</strong>.
+        </p>
+
+    `;
+
+    limparHorario();
+
+}
+
+
+
+// =========================================
+// MOSTRAR HORÁRIO DO ALUNO
+// =========================================
+
+function mostrarHorarioAluno(aluno) {
+
+    // Limpa a tabela antes de marcar
+
+    limparHorario();
+
+
+    // =====================================
+    // MOSTRA OS DADOS DO ALUNO
+    // =====================================
+
+    document.getElementById("resultadoPesquisa").innerHTML = `
+
+        <h3>${aluno.nome}</h3>
+
+        <p>
+            <strong>Código:</strong>
+            ${aluno.codigo}
+        </p>
+
+        <p>
+            <strong>Idade:</strong>
+            ${aluno.idade} anos
+        </p>
+
+        <p>
+            <strong>Turma:</strong>
+            ${aluno.turma}
+        </p>
+
+        <p>
+            <strong>E-mail:</strong>
+            ${aluno.email}
+        </p>
+
+        <p>
+            <strong>Tipo:</strong>
+            Aluno
+        </p>
+
+
+
+    `;
+
+
+    // =====================================
+    // PEGA AS DISCIPLINAS DO ALUNO
+    // =====================================
+
+    aluno.gradeHoraria.forEach(function(codigoDisciplina) {
+
+
+        // Procura a disciplina pelo código
+
+        let disciplina = disciplinas.find(function(d) {
+
+            return d.codigo === codigoDisciplina;
+
+        });
+
+
+        // Se encontrou a disciplina
+
+        if (disciplina) {
+
+            marcarHorario(disciplina);
+
+        }
+
+    });
+
+}
+
+
+
+// =========================================
+// MOSTRAR HORÁRIO DO PROFESSOR
+// =========================================
+
+function mostrarHorarioProfessor(professor) {
+
+    // Limpa a tabela
+
+    limparHorario();
+
+
+    // =====================================
+    // MOSTRA OS DADOS DO PROFESSOR
+    // =====================================
+
+    document.getElementById("resultadoPesquisa").innerHTML = `
+
+        <h3>${professor.nome}</h3>
+
+        <p>
+            <strong>Código:</strong>
+            ${professor.codigo}
+        </p>
+
+        <p>
+            <strong>Disciplina:</strong>
+            ${professor.disciplina}
+        </p>
+
+        <p>
+            <strong>Formação:</strong>
+            ${professor.formacao}
+        </p>
+
+        <p>
+            <strong>E-mail:</strong>
+            ${professor.email}
+        </p>
+
+        <p>
+            <strong>Tipo:</strong>
+            Professor
+        </p>
+
+        <h4>Grade horária</h4>
+
+    `;
+
+
+    // =====================================
+    // PROCURA AS DISCIPLINAS DO PROFESSOR
+    // =====================================
+
+    let disciplinasProfessor = disciplinas.filter(
+
+        function(disciplina) {
+
+            return disciplina.professorCodigo === professor.codigo;
+
+        }
+
+    );
+
+
+    // =====================================
+    // MARCA AS AULAS DO PROFESSOR
+    // =====================================
+
+    disciplinasProfessor.forEach(
+
+        function(disciplina) {
+
+            marcarHorario(disciplina);
+
+        }
+
+    );
+
+}
+
+
+
+// =========================================
+// MARCAR DISCIPLINA NA TABELA
+// =========================================
+
+function marcarHorario(disciplina) {
+
+
+    // Procura a célula correspondente
+    // ao dia e horário da disciplina
+
+    let celula = document.querySelector(
+
+        `#tabelaHorario td[data-dia="${disciplina.diaSemana}"][data-horario="${disciplina.horaInicio}"]`
+
+    );
+
+
+    // =====================================
+    // SE ENCONTROU A CÉLULA
+    // =====================================
+
+    if (celula) {
+
+
+        celula.innerHTML = `
+
+            <strong>
+                ${disciplina.nome}
+            </strong>
+
+            <br>
+
+            ${disciplina.horaInicio}
+            às
+            ${disciplina.horaFim}
+
+        `;
+
+
+        // Adiciona a classe CSS
+
+        celula.classList.add("ocupado");
+
+    }
+
+}
+
+
+
+// =========================================
+// LIMPAR GRADE HORÁRIA
+// =========================================
+
+function limparHorario() {
+
+
+    let celulas = document.querySelectorAll(
+
+        "#tabelaHorario td"
+
+    );
+
+
+    celulas.forEach(function(celula) {
+
+        celula.innerHTML = "";
+
+        celula.classList.remove("ocupado");
+
+    });
+
+}
+
+
+
+// =========================================
+// PESQUISAR AO APERTAR ENTER
+// =========================================
+
+document
+    .getElementById("codigoPesquisa")
+    .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+
+            buscarHorario();
+
+        }
+
+    });
+
+</script>
+
+
+
+</body>
+
+</html>

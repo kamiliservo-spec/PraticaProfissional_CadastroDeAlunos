@@ -95,112 +95,132 @@ let professores = [
 // =========================================
 // DISCIPLINAS
 // =========================================
+// =========================================
+// BANCO DE DADOS - DISCIPLINAS
+// =========================================
 
 let disciplinas = [
-
     {
         codigo: "D001",
         nome: "Matemática",
         cargaHoraria: "80h",
         professorCodigo: "P001",
+        professor: "Carlos Silva",
+        email: "carlos.silva@escola.br",
         diaSemana: "Segunda-feira",
         horaInicio: "08:00",
-        horaFim: "09:00"
+        horaFim: "09:00",
+        provas: []
     },
-
     {
         codigo: "D002",
         nome: "Português",
         cargaHoraria: "80h",
         professorCodigo: "P003",
+        professor: "Ana Souza",
+        email: "ana.souza@escola.br",
         diaSemana: "Terça-feira",
         horaInicio: "09:00",
-        horaFim: "10:00"
+        horaFim: "10:00",
+        provas: []
     },
-
     {
         codigo: "D003",
         nome: "História",
         cargaHoraria: "60h",
         professorCodigo: "P002",
+        professor: "João Mendes",
+        email: "joao.mendes@escola.br",
         diaSemana: "Quarta-feira",
         horaInicio: "10:00",
-        horaFim: "11:00"
+        horaFim: "11:00",
+        provas: []
     },
-
     {
         codigo: "D004",
         nome: "Geografia",
         cargaHoraria: "60h",
         professorCodigo: "P004",
+        professor: "Mariana Lima",
+        email: "mariana.lima@escola.br",
         diaSemana: "Quinta-feira",
         horaInicio: "11:00",
-        horaFim: "12:00"
+        horaFim: "12:00",
+        provas: []
     },
-
     {
         codigo: "D005",
         nome: "Biologia",
         cargaHoraria: "60h",
         professorCodigo: "P005",
+        professor: "Fernanda Costa",
+        email: "fernanda.costa@escola.br",
         diaSemana: "Sexta-feira",
         horaInicio: "08:00",
-        horaFim: "09:00"
+        horaFim: "09:00",
+        provas: []
     },
-
     {
         codigo: "D006",
         nome: "Física",
         cargaHoraria: "60h",
         professorCodigo: "P008",
+        professor: "Roberto Alves",
+        email: "roberto.alves@escola.br",
         diaSemana: "Segunda-feira",
         horaInicio: "09:00",
-        horaFim: "10:00"
+        horaFim: "10:00",
+        provas: []
     },
-
     {
         codigo: "D007",
         nome: "Química",
         cargaHoraria: "60h",
         professorCodigo: "P007",
+        professor: "Patricia Rocha",
+        email: "patricia.rocha@escola.br",
         diaSemana: "Terça-feira",
         horaInicio: "10:00",
-        horaFim: "11:00"
+        horaFim: "11:00",
+        provas: []
     },
-
     {
         codigo: "D008",
         nome: "Inglês",
         cargaHoraria: "40h",
         professorCodigo: "P009",
+        professor: "Lucas Ferreira",
+        email: "lucas.ferreira@escola.br",
         diaSemana: "Quarta-feira",
         horaInicio: "11:00",
-        horaFim: "12:00"
+        horaFim: "12:00",
+        provas: []
     },
-
     {
         codigo: "D009",
         nome: "Educação Física",
         cargaHoraria: "40h",
         professorCodigo: "P006",
+        professor: "Ricardo Santos",
+        email: "ricardo.santos@escola.br",
         diaSemana: "Quinta-feira",
         horaInicio: "08:00",
-        horaFim: "09:00"
+        horaFim: "09:00",
+        provas: []
     },
-
     {
         codigo: "D010",
         nome: "Artes",
         cargaHoraria: "40h",
         professorCodigo: "P010",
+        professor: "Beatriz Oliveira",
+        email: "beatriz.oliveira@escola.br",
         diaSemana: "Sexta-feira",
         horaInicio: "09:00",
-        horaFim: "10:00"
+        horaFim: "10:00",
+        provas: []
     }
-
 ];
-
-
 // =========================================
 // ALUNOS
 // =========================================
